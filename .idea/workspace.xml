@@ -29,7 +29,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -71,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1574389442774</updated>
       <workItem from="1574389453364" duration="3366000" />
-      <workItem from="1574423346823" duration="26184000" />
+      <workItem from="1574423346823" duration="27460000" />
     </task>
     <servers />
   </component>
@@ -84,6 +84,6 @@
     </ignored-roots>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/text_summary$text_summary.coverage" NAME="text_summary Coverage Results" MODIFIED="1574466088949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/text_summary$text_summary.coverage" NAME="text_summary Coverage Results" MODIFIED="1574468868799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

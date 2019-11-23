@@ -13,18 +13,6 @@ import requests
 import urllib
 import html5lib
 from urllib.request import Request, urlopen
-from selenium import webdriver
-
-capabilities = {
-    "browserName": "chrome",
-    "version": "77.0",
-    "enableVNC": True,
-    "enableVideo": False,
-    'javascriptEnabled': True}
-
-driver = webdriver.Remote(
-       command_executor="http://34.73.169.89:4444/wd/hub",
-       desired_capabilities=capabilities)
 
 nlp = spacy.load("en_core_web_sm")
 app = flask.Flask(__name__)
