@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import flask
+from flask import Flask
 from spacy_summarization import text_summarizer
 from gensim.summarization import summarize
 from nltk_summarization import nltk_summarizer
@@ -13,9 +14,16 @@ import requests
 import urllib
 import html5lib
 from urllib.request import Request, urlopen
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
+sentry_sdk.init(
+    dsn="https://647759d6f12c4cce84747fda52bddbce@sentry.io/1831592",
+    integrations=[FlaskIntegration()]
+)
+
+app = Flask(__name__)
 nlp = spacy.load("en_core_web_sm")
-app = flask.Flask(__name__)
 
 
 # Sumy
