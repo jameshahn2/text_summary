@@ -12,6 +12,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Flask Main" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -71,7 +72,9 @@
       <option name="presentableId" value="Default" />
       <updated>1574389442774</updated>
       <workItem from="1574389453364" duration="3366000" />
-      <workItem from="1574423346823" duration="31455000" />
+      <workItem from="1574423346823" duration="32429000" />
+      <workItem from="1574541105779" duration="4966000" />
+      <workItem from="1574699437364" duration="2303000" />
     </task>
     <servers />
   </component>
@@ -84,6 +87,6 @@
     </ignored-roots>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/text_summary$text_summary.coverage" NAME="text_summary Coverage Results" MODIFIED="1574475987363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/text_summary$text_summary.coverage" NAME="text_summary Coverage Results" MODIFIED="1574703974993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

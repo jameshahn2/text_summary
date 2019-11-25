@@ -1,3 +1,5 @@
+nltk
+verboselogs
 urllib3
 html5lib
 selenium
