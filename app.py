@@ -13,6 +13,19 @@ import requests
 import spacy
 import spacy_summarization
 import time
+import docker
+from selenium import webdriver
+
+capabilities = {
+    "browserName": "chrome",
+    "version": "77.0",
+    "enableVNC": True,
+    "enableVideo": False
+}
+
+driver = webdriver.Remote(
+    command_executor="http://35.231.180.228:4444/wd/hub",
+    desired_capabilities=capabilities)
 
 headers = {
     'authority': 'triberocket.com',

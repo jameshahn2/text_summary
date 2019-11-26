@@ -1,3 +1,4 @@
+docker
 nltk
 verboselogs
 html5lib
