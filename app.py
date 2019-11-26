@@ -1,25 +1,31 @@
+from __future__ import unicode_literals
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, url_for, request
 from gensim.summarization import summarize
 from nltk_summarization import nltk_summarizer
-from sentry_sdk.integrations.flask import FlaskIntegration
 from spacy_summarization import text_summarizer
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.summarizers.lex_rank import LexRankSummarizer
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
+from spacy.lang.en import English
+from urllib.error import URLError
 import flask
-import sentry_sdk
 import spacy
+import spacy_summarization
 import time
+import urllib
 
-sentry_sdk.init(
-    dsn="https://647759d6f12c4cce84747fda52bddbce@sentry.io/1831592",
-    integrations=[FlaskIntegration()]
-)
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 '
+                         'Safari/537.11',
+           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+           'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+           'Accept-Encoding': 'none',
+           'Accept-Language': 'en-US,en;q=0.8',
+           'Connection': 'keep-alive'}
 
-app = Flask(__name__)
 nlp = spacy.load("en_core_web_sm")
+app = Flask(__name__)
 
 
 # Sumy
@@ -42,7 +48,7 @@ def readingtime(mytext):
 # Fetch Text From Url
 def get_text(url):
     page = urlopen(url)
-    soup = BeautifulSoup(page)
+    soup = BeautifulSoup(page.content)
     fetched_text = ' '.join(map(lambda p: p.text, soup.find_all('p')))
     return fetched_text
 
@@ -54,6 +60,7 @@ def index():
 
 @app.route('/analyze', methods=['GET', 'POST'])
 def analyze():
+    global summary_reading_time_nltk
     start = time.time()
     if flask.request.method == 'POST':
         rawtext = flask.request.form['rawtext']
@@ -84,10 +91,10 @@ def analyze():
 
 @app.route('/analyze_url', methods=['GET', 'POST'])
 def analyze_url():
-    start = time.time()
+    start: float = time.time()
     if request.method == 'POST':
         raw_url = request.form['raw_url']
-        rawtext = get_text(raw_url)
+        rawtext: str = get_text(raw_url)
         final_reading_time = readingtime(rawtext)
         final_summary_spacy = text_summarizer(rawtext)
         summary_reading_time = readingtime(final_summary_spacy)
@@ -100,9 +107,8 @@ def analyze_url():
         # Sumy
         final_summary_sumy = sumy_summary(rawtext)
         summary_reading_time_sumy = readingtime(final_summary_sumy)
-
-        end = time.time()
         final_time = end - start
+        end = time.time()
     return flask.render_template('index.html', ctext=rawtext, final_summary_spacy=final_summary_spacy,
                                  final_summary_gensim=final_summary_gensim, final_summary_nltk=final_summary_nltk,
                                  final_time=final_time, final_reading_time=final_reading_time,

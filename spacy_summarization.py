@@ -39,5 +39,6 @@ def text_summarizer(raw_docx):
 
     summarized_sentences = nlargest(7, sentence_scores, key=sentence_scores.get)
     final_sentences = [w.text for w in summarized_sentences]
-    summary = ' '.join(final_sentences)
+    summary: str = ' '.join(final_sentences)
     return summary
+
