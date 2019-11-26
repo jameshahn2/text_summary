@@ -7,22 +7,26 @@ from spacy_summarization import text_summarizer
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.summarizers.lex_rank import LexRankSummarizer
-from urllib.request import urlopen, Request
 from spacy.lang.en import English
-from urllib.error import URLError
 import flask
+import requests
 import spacy
 import spacy_summarization
 import time
-import urllib
 
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 '
-                         'Safari/537.11',
-           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-           'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-           'Accept-Encoding': 'none',
-           'Accept-Language': 'en-US,en;q=0.8',
-           'Connection': 'keep-alive'}
+headers = {
+    'authority': 'triberocket.com',
+    'pragma': 'no-cache',
+    'cache-control': 'no-cache',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+    'sec-fetch-user': '?1',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+    'sec-fetch-site': 'none',
+    'sec-fetch-mode': 'navigate',
+    'accept-encoding': 'gzip, deflate, br',
+    'accept-language': 'en-US,en;q=0.9'
+}
 
 nlp = spacy.load("en_core_web_sm")
 app = Flask(__name__)
@@ -47,7 +51,7 @@ def readingtime(mytext):
 
 # Fetch Text From Url
 def get_text(url):
-    page = urlopen(url)
+    page = requests.get(url, headers=headers, timeout=30)
     soup = BeautifulSoup(page.content)
     fetched_text = ' '.join(map(lambda p: p.text, soup.find_all('p')))
     return fetched_text
