@@ -1,6 +1,5 @@
 nltk
 verboselogs
-urllib3
 html5lib
 selenium
 Requests
@@ -17,6 +16,5 @@ nltk                               3.4
 spacy                              2.0.18     
 sumy                               0.7.0      
 thinc                              6.12.1     
-urllib3                            1.24.1 
-gensim                             3.6.0      
+gensim                             3.6.0
 gensim-sum-ext                     0.1.2    

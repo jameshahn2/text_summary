@@ -19,9 +19,11 @@ headers = {
     'pragma': 'no-cache',
     'cache-control': 'no-cache',
     'upgrade-insecure-requests': '1',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                  'Chrome/78.0.3904.108 Safari/537.36',
     'sec-fetch-user': '?1',
-    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,'
+              'application/signed-exchange;v=b3',
     'sec-fetch-site': 'none',
     'sec-fetch-mode': 'navigate',
     'accept-encoding': 'gzip, deflate, br',
@@ -52,7 +54,8 @@ def readingtime(mytext):
 # Fetch Text From Url
 def get_text(url):
     page = requests.get(url, headers=headers, timeout=30)
-    soup = BeautifulSoup(page.content)
+    soup = BeautifulSoup(page.content, 'lxml')
+    print(page.content.decode('utf-8')[0:2000])
     fetched_text = ' '.join(map(lambda p: p.text, soup.find_all('p')))
     return fetched_text
 
@@ -111,8 +114,9 @@ def analyze_url():
         # Sumy
         final_summary_sumy = sumy_summary(rawtext)
         summary_reading_time_sumy = readingtime(final_summary_sumy)
-        final_time = end - start
+
         end = time.time()
+        final_time = end - start
     return flask.render_template('index.html', ctext=rawtext, final_summary_spacy=final_summary_spacy,
                                  final_summary_gensim=final_summary_gensim, final_summary_nltk=final_summary_nltk,
                                  final_time=final_time, final_reading_time=final_reading_time,
